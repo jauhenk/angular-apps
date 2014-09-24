@@ -1,0 +1,30 @@
+<div data-id="{{post._id}}" ng-show="post.title && post.body && post.author" class="panel panel-default" ng-click="!editing && postClick(post._id)">
+	<div class="panel-heading">
+
+		<div class="btn-group pull-right" ng-click="$event.stopPropagation();">
+			<a href ng-click="edit(post);" ng-hide="editing"><i class="glyphicon glyphicon-pencil"></i></a>
+			<a href ng-click="delete(post._id);" ng-hide="editing"><i class="glyphicon glyphicon-remove-sign"></i></a>
+
+			<a href ng-click="applyEdit(post, editPost)" ng-show="editing"><i class="glyphicon glyphicon-ok"></i></a>
+			<a href ng-click="cancelEdit()" ng-show="editing"><i class="glyphicon glyphicon-remove"></i></a>
+		</div>
+
+		<h3 ng-hide="editing">{{post.title}}</h3>
+		<h3 ng-show="editing"><input class="form-control" type="text" ng-model="editPost.title"/></h3>
+
+	</div>
+
+	<div class="panel-body">
+
+		<input ng-show="editing" type="file" name="image" class="form-control" id="imageEdit" file-upload="editPost.image">
+		<img class="img-rounded col-sm-2 pull-left" ng-show="post.image && !editing" ng-src="{{post.image}}" alt="{{post.title}}"/>
+		<img class="img-rounded col-sm-12" ng-show="editPost.image && editing" ng-src="{{editPost.image}}" alt="{{post.title}}"/>
+		<p ng-hide="editing">{{post.body|limitText:limitText}}</p>
+		<textarea ng-show="editing" name="text" class="form-control" rows="8" ng-model="editPost.body"></textarea>
+
+	</div>
+
+	<div class="panel-footer">
+		- {{post.author}} by {{post.date | date}}
+	</div>
+</div>

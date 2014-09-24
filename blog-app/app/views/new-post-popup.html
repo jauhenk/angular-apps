@@ -1,0 +1,33 @@
+<button class="btn btn-lg btn-primary" data-toggle="modal" data-target="#newPost"><i class="glyphicon-plus"></i> Add new Post!</button>
+<div class="modal fade" id="newPost">
+	<div class="modal-dialog">
+		<form class="modal-content" name="newPostForm" novalidate>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">New post</h4>
+			</div>
+			<div class="modal-body">
+				<div class="form-group" ng-class="{'has-error': newPostForm.author.$dirty && newPostForm.author.$invalid}">
+					<label for="author">Your name</label>
+					<input type="text" name="author" class="form-control" id="author" placeholder="Enter your name" required ng-model="newPost.author">
+				</div>
+				<div class="form-group" ng-class="{'has-error': newPostForm.title.$dirty && newPostForm.title.$invalid}">
+					<label for="title">Title</label>
+					<input type="text" name="title" class="form-control" id="title" placeholder="Enter title" required  ng-model="newPost.title">
+				</div>
+				<div class="form-group">
+					<label for="image">Post image</label>
+					<input type="file" name="image" class="form-control" id="image" file-upload="newPost.image">
+					<img ng-show="newPost.image" class="img-rounded col-sm-12" ng-src="{{newPost.image}}" alt=""/>
+				</div>
+				<div class="form-group" ng-class="{'has-error': newPostForm.text.$dirty && newPostForm.text.$invalid}">
+					<textarea name="text" class="form-control" rows="8" ng-model="newPost.body" required></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button class="btn btn-primary" ng-click="addPost(newPost)" ng-disabled="newPostForm.$invalid" data-dismiss="modal">Save changes</button>
+			</div>
+		</form>
+	</div>
+</div>
